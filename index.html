@@ -3,200 +3,307 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulateur reste à charge – Formation BIM Archicad</title>
+<title>Christophe Fortineau – Formateur BIM Archicad pour architectes</title>
+<meta name="description" content="Formations Archicad par un architecte en exercice : initiation, perfectionnement et expertise. Formateur indépendant certifié, partout en France.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
+  :root{--font:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;--txt:#1a1a1a;--gris:#8c8c8c;--ligne:#e6e6e6;--fond:#fff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font);font-weight:300;font-size:1.1rem;letter-spacing:-.01em;color:var(--txt);background:var(--fond);line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  .row{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:56px 0;border-bottom:1px solid var(--ligne)}
+  .row:last-of-type{border-bottom:none}
+  .label{font-weight:400;color:var(--txt)}
+  .content p{margin:0 0 1.1em;max-width:760px}
+  .content p:last-child{margin-bottom:0}
+  .intro{padding:72px 0 56px}
+  .intro h1{font-size:2.6rem;font-weight:400;margin:0 0 6px;letter-spacing:-.02em}
+  .intro .role{color:var(--gris);font-size:1.1rem;margin:0}
+  .portrait{width:220px;height:220px;object-fit:cover;filter:grayscale(100%);display:block}
+  .formats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 40px}
+  .format{border-top:1px solid var(--txt);padding-top:14px}
+  .format h3{margin:0 0 2px;font-size:1.15rem;font-weight:400}
+  .format .duree{font-size:.9rem;color:var(--gris);margin-bottom:10px}
+  .format p{margin:0;font-size:1rem}
+  ul{margin:0 0 1.2em;padding-left:1.1em}
+  li{margin-bottom:.4em}
+  .btn{display:inline-block;margin-top:8px;padding:12px 26px;border:1px solid var(--txt);color:var(--txt);text-decoration:none;font-size:.95rem;font-weight:400;transition:.2s}
+  .btn:hover{background:var(--txt);color:#fff}
+  footer{padding:40px 0 64px;border-top:1px solid var(--ligne);font-size:.8rem;font-style:italic;font-weight:300;color:var(--gris);line-height:1.7}
+  footer a{color:var(--gris)}
+  /* 4 formats sur une ligne sur grand écran, sinon 2 par ligne : jamais 3 + 1 */
+  @media (min-width:1400px){.formats{grid-template-columns:repeat(4,1fr);gap:24px}}
+  @media (max-width:900px){
+    .row{grid-template-columns:1fr;gap:16px;padding:40px 0}
+    .wrap{padding:0 24px}
+    .intro h1{font-size:2rem}
+  }
+  @media (max-width:560px){.formats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="row intro">
+    <div class="label">
+      <img class="portrait" src="portrait.jpg" alt="Christophe Fortineau, architecte et formateur Archicad">
+    </div>
+    <div class="content">
+      <h1>Christophe Fortineau</h1>
+      <p class="role">Formateur BIM Archicad indépendant et certifié</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">l'approche</div>
+    <div class="content">
+      <h2 style="font-size:1.1rem;font-weight:400;margin:0 0 1em">L'approche d'un confrère praticien</h2>
+      <p>Salarié au sein d'une agence d'architecture, je pratique Archicad chaque jour sur des projets réels : rendus de phase, pilotage de projet, suivi de chantier. Mon approche pédagogique est moins celle d'un technicien ou d'un vendeur de logiciel que celle d'un confrère qui éprouve au quotidien les réalités de la conception et du suivi de chantier.</p>
+      <p>Chaque formation s'attache donc à ce qui compte en agence : des méthodes de travail fiables, une modélisation maîtrisée et des documents rendus dans les délais, plutôt qu'un simple tour des fonctionnalités.</p>
+      <p>Depuis 2016, plusieurs centaines de consœurs et confrères architectes ont suivi l'une de mes formations Archicad.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">les formations</div>
+    <div class="content">
+      <div class="formats">
+        <div class="format">
+          <h3>Initiation Archicad</h3>
+          <div class="duree">3 à 4 jours</div>
+          <p>Les bases d'une méthode de travail BIM solide : interface, modélisation, documentation et mise en page d'un projet, de la conception aux plans.</p>
+        </div>
+        <div class="format">
+          <h3>Perfectionnement Archicad</h3>
+          <div class="duree">3 à 4 jours</div>
+          <p>Gagner en efficacité et en fiabilité : bibliothèques, gabarits, optimisation du modèle, collaboration et production de documents.</p>
+        </div>
+        <div class="format">
+          <h3>Initiation + Perfectionnement</h3>
+          <div class="duree">4 à 8 jours</div>
+          <p>Un parcours complet, de la prise en main à la maîtrise, adapté au niveau et aux pratiques de votre agence.</p>
+        </div>
+        <div class="format">
+          <h3>Expertise Archicad</h3>
+          <div class="duree">1 à 2 jours</div>
+          <p>Des sessions ciblées sur un thème précis (gabarit d'agence, rendu, collaboration…) pour lever un blocage ou monter en compétence rapidement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">modalités</div>
+    <div class="content">
+      <ul>
+        <li>Formations destinées aux architectes et à leurs équipes, partout en France.</li>
+        <li>Contenus adaptés à vos projets, votre niveau et votre organisation.</li>
+        <li>Formateur certifié Qualiopi : prise en charge possible, sous conditions, par votre OPCO ou le FIF PL.</li>
+      </ul>
+      <p>Pour estimer le coût d'une formation selon sa durée et son format :</p>
+      <a class="btn" href="#simulateur">Simulation coût formation</a>
+    </div>
+  </div>
+
+  <div class="row" id="simulateur">
+    <div class="label">simulation coût formation</div>
+    <div class="content">
+      <style>
+
+#simulateur{
     --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --muted:#6b7385;
     --line:#e3e6ec; --accent:#2f5bea; --accent-soft:#eaf0ff;
   }
-  *{box-sizing:border-box}
-  body{
+#simulateur *{box-sizing:border-box}
+#simulateur body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.5; padding:32px 16px;
   }
-  .wrap{max-width:640px; margin:0 auto}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px}
+#simulateur .wrap{max-width:640px; margin:0 auto}
+#simulateur .sim-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px}
 
   /* Titre : même esthétique que les totaux */
-  .titre{
+#simulateur .sim-titre{
     background:var(--ink); color:#fff; border:none;
     display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
   }
-  .titre-txt{display:inline-block}
+#simulateur .sim-titre-txt{display:inline-block}
   /* Le titre est ajusté en JS pour avoir la largeur exacte du sous-titre */
-  .titre h1{
+#simulateur .sim-titre h1{
     margin:0 0 6px; font-weight:700; line-height:1.1;
     white-space:nowrap; font-size:1.4rem; display:inline-block;
   }
-  .titre .sub{
+#simulateur .sim-titre .sim-sub{
     display:block; margin:0; font-size:.85rem; font-style:italic; color:#aeb3bf; white-space:nowrap;
   }
-  .qualiopi{display:inline-block; line-height:0; flex:none}
-  .qualiopi img{
+#simulateur .sim-qualiopi{display:inline-block; line-height:0; flex:none}
+#simulateur .sim-qualiopi img{
     height:64px; width:auto; display:block; border-radius:6px; background:#fff;
     transition:opacity .2s;
   }
-  .qualiopi:hover img{opacity:.85}
+#simulateur .sim-qualiopi:hover img{opacity:.85}
 
-  .field{margin-bottom:20px}
-  .field:last-child{margin-bottom:0}
-  label, .label{display:block; font-weight:600; font-size:.9rem; margin-bottom:8px}
-  input[type=number], input[type=text], select{
+#simulateur .sim-field{margin-bottom:20px}
+#simulateur .sim-field:last-child{margin-bottom:0}
+#simulateur label, #simulateur .sim-label{display:block; font-weight:600; font-size:.9rem; margin-bottom:8px}
+#simulateur input[type=number], #simulateur input[type=text], #simulateur select{
     width:100%; padding:11px 12px; font-size:1rem;
     border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
   }
-  input:focus, select:focus{outline:2px solid var(--accent); border-color:transparent}
+#simulateur input:focus, #simulateur select:focus{outline:2px solid var(--accent); border-color:transparent}
 
   /* Flèches des champs numériques agrandies */
-  input[type=number]{padding-right:6px}
+#simulateur input[type=number]{padding-right:6px}
   input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button{
+#simulateur input[type=number]::-webkit-outer-spin-button{
     opacity:1; height:34px; width:30px; cursor:pointer;
   }
-  input[type=number]{-moz-appearance:number-input}
+#simulateur input[type=number]{-moz-appearance:number-input}
 
-  .row{display:grid; grid-template-columns:1fr 2fr; gap:12px}
-  .radios{display:grid; gap:8px}
-  .radio{
+#simulateur .sim-row{display:grid; grid-template-columns:1fr 2fr; gap:12px}
+#simulateur .sim-radios{display:grid; gap:8px}
+#simulateur .sim-radio{
     display:flex; align-items:center; gap:10px; padding:11px 12px;
     border:1px solid var(--line); border-radius:8px; cursor:pointer; font-weight:400; margin:0;
   }
-  .radio:has(input:checked){border-color:var(--accent); background:var(--accent-soft)}
-  .hint{font-size:.82rem; color:var(--muted); margin-top:6px; min-height:1em}
-  .hint.warn{color:#b45309}
-  .hidden{display:none !important}
+#simulateur .sim-radio:has(input:checked){border-color:var(--accent); background:var(--accent-soft)}
+#simulateur .sim-hint{font-size:.82rem; color:var(--muted); margin-top:6px; min-height:1em}
+#simulateur .sim-hint.warn{color:#b45309}
+#simulateur .sim-hidden{display:none !important}
 
   /* Résultats */
-  .results{background:var(--ink); color:#fff; border:none}
-  .res-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.12)}
-  .res-row:last-of-type{border-bottom:none}
-  .res-row span:first-child{font-size:.92rem; opacity:.85}
-  .res-row strong{font-size:1.25rem; text-align:right}
-  .res-row.main strong{font-size:1.7rem}
-  .res-row.deduct strong{color:#8fe3a8}
-  .res-row.deduct small{font-weight:400; font-size:.8rem; opacity:.75; margin-left:6px}
+#simulateur .sim-results{background:var(--ink); color:#fff; border:none}
+#simulateur .sim-res-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.12)}
+#simulateur .sim-res-row:last-of-type{border-bottom:none}
+#simulateur .sim-res-row span:first-child{font-size:.92rem; opacity:.85}
+#simulateur .sim-res-row strong{font-size:1.25rem; text-align:right}
+#simulateur .sim-res-row.sim-main strong{font-size:1.7rem}
+#simulateur .sim-res-row.sim-deduct strong{color:#8fe3a8}
+#simulateur .sim-res-row.sim-deduct small{font-weight:400; font-size:.8rem; opacity:.75; margin-left:6px}
 
   /* Les deux derniers totaux : colorés selon le résultat (teintes douces) */
-  .res-row.tone{margin:6px -12px; padding:12px; border-radius:10px; border-bottom:none; transition:background .3s}
-  .res-row.tone.vert{background:rgba(143,214,166,.20)}
-  .res-row.tone.vert strong{color:#b6ecc7}
-  .res-row.tone.orange{background:rgba(240,190,120,.20)}
-  .res-row.tone.orange strong{color:#f6d29b}
-  .res-row.tone.rouge{background:rgba(232,140,140,.20)}
-  .res-row.tone.rouge strong{color:#f3b3b3}
-  .disclaimer{font-size:.8rem; opacity:.7; margin-top:16px}
+#simulateur .sim-res-row.sim-tone{margin:6px -12px; padding:12px; border-radius:10px; border-bottom:none; transition:background .3s}
+#simulateur .sim-res-row.sim-tone.vert{background:rgba(143,214,166,.20)}
+#simulateur .sim-res-row.sim-tone.vert strong{color:#b6ecc7}
+#simulateur .sim-res-row.sim-tone.orange{background:rgba(240,190,120,.20)}
+#simulateur .sim-res-row.sim-tone.orange strong{color:#f6d29b}
+#simulateur .sim-res-row.sim-tone.rouge{background:rgba(232,140,140,.20)}
+#simulateur .sim-res-row.sim-tone.rouge strong{color:#f3b3b3}
+#simulateur .sim-disclaimer{font-size:.8rem; opacity:.7; margin-top:16px}
 
-  .financeurs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-  .mini{display:flex; flex-direction:column; gap:6px}
-  .sugg{
+#simulateur .sim-financeurs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+#simulateur .sim-mini{display:flex; flex-direction:column; gap:6px}
+#simulateur .sim-sugg{
     position:absolute; left:0; right:0; top:100%; z-index:10; background:#fff;
     border:1px solid var(--line); border-radius:8px; margin-top:4px;
     max-height:220px; overflow:auto; box-shadow:0 6px 20px rgba(0,0,0,.08);
   }
-  .sugg div{padding:9px 12px; cursor:pointer; font-size:.95rem}
-  .sugg div:hover{background:var(--accent-soft)}
-  .rel{position:relative}
+#simulateur .sim-sugg div{padding:9px 12px; cursor:pointer; font-size:.95rem}
+#simulateur .sim-sugg div:hover{background:var(--accent-soft)}
+#simulateur .sim-rel{position:relative}
 
   @media (max-width:520px){
-    .titre h1, .titre .sub{white-space:normal}
-    .qualiopi img{height:52px}
+#simulateur .sim-titre h1, #simulateur .sim-titre .sim-sub{white-space:normal}
+#simulateur .sim-qualiopi img{height:52px}
   }
-</style>
-</head>
-<body>
-<div class="wrap">
-
-  <div class="card titre">
-    <div class="titre-txt">
-      <h1 id="titreH1">Formation BIM Archicad</h1>
-      <p class="sub" id="titreSub">Simulation reste à charge après financements OPCO / FIF PL.</p>
+      </style>
+      <div class="simulator-content">
+<div class="sim-card sim-titre">
+    <div class="sim-titre-txt">
+      <h1 id="sim-titreH1">Formation BIM Archicad</h1>
+      <p class="sim-sub" id="sim-titreSub">Simulation reste à charge après financements OPCO / FIF PL.</p>
     </div>
-    <a class="qualiopi" href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation" target="_blank" rel="noopener" title="Organisme certifié Qualiopi">
+    <a class="sim-qualiopi" href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation" target="_blank" rel="noopener" title="Organisme certifié Qualiopi">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRObiuRPHPYlaq1IgiUdpUR7ETxCvYdSa7r_DWy5rK8Hw&s=10" alt="Certifié Qualiopi">
     </a>
   </div>
 
-  <div class="card">
-    <div class="field">
+  <div class="sim-card">
+    <div class="sim-field">
       <label for="type">Type de formation</label>
-      <select id="type">
+      <select id="sim-type">
         <option value="init">Initiation Archicad</option>
         <option value="perf">Perfectionnement Archicad</option>
         <option value="both">Initiation et perfectionnement Archicad</option>
       </select>
     </div>
 
-    <div class="field">
+    <div class="sim-field">
       <label for="nbPart">Nombre de participants (1 à 8)</label>
-      <input type="number" id="nbPart" min="1" max="8" value="1">
+      <input type="number" id="sim-nbPart" min="1" max="8" value="1">
     </div>
 
-    <div class="field">
+    <div class="sim-field">
       <label for="duree">Durée de la formation (jours)</label>
-      <select id="duree"></select>
+      <select id="sim-duree"></select>
     </div>
 
-    <div class="field">
-      <span class="label">Lieu de la formation</span>
-      <div class="radios">
-        <label class="radio"><input type="radio" name="lieu" value="client" checked> Dans vos locaux</label>
-        <label class="radio"><input type="radio" name="lieu" value="visio"> Par visioconférence</label>
-        <label class="radio"><input type="radio" name="lieu" value="formateur"> Dans les locaux du formateur</label>
+    <div class="sim-field">
+      <span class="sim-label">Lieu de la formation</span>
+      <div class="sim-radios">
+        <label class="sim-radio"><input type="radio" name="lieu" value="client" checked> Dans vos locaux</label>
+        <label class="sim-radio"><input type="radio" name="lieu" value="visio"> Par visioconférence</label>
+        <label class="sim-radio"><input type="radio" name="lieu" value="formateur"> Dans les locaux du formateur</label>
       </div>
     </div>
 
-    <div class="field" id="blocLocalisation">
-      <span class="label">Localisation de la formation</span>
-      <div class="row">
-        <div class="rel">
-          <input type="text" id="cp" inputmode="numeric" maxlength="5" placeholder="Code postal" autocomplete="off">
-          <div class="sugg hidden" id="suggCp"></div>
+    <div class="sim-field" id="sim-blocLocalisation">
+      <span class="sim-label">Localisation de la formation</span>
+      <div class="sim-row">
+        <div class="sim-rel">
+          <input type="text" id="sim-cp" inputmode="numeric" maxlength="5" placeholder="Code postal" autocomplete="off">
+          <div class="sim-sugg sim-hidden" id="sim-suggCp"></div>
         </div>
-        <div class="rel">
-          <input type="text" id="ville" placeholder="Commune" autocomplete="off">
-          <div class="sugg hidden" id="suggVille"></div>
+        <div class="sim-rel">
+          <input type="text" id="sim-ville" placeholder="Commune" autocomplete="off">
+          <div class="sim-sugg sim-hidden" id="sim-suggVille"></div>
         </div>
       </div>
-      <div class="hint" id="locHint"></div>
+      <div class="sim-hint" id="sim-locHint"></div>
     </div>
 
-    <div class="field">
-      <span class="label">Statut des participants</span>
-      <div class="financeurs">
-        <div class="mini">
+    <div class="sim-field">
+      <span class="sim-label">Statut des participants</span>
+      <div class="sim-financeurs">
+        <div class="sim-mini">
           <label for="nbSal">Salariés (OPCO)</label>
-          <input type="number" id="nbSal" min="0" max="8" value="1">
+          <input type="number" id="sim-nbSal" min="0" max="8" value="1">
         </div>
-        <div class="mini">
+        <div class="sim-mini">
           <label for="nbNonSal">Non salariés (FIF PL)</label>
-          <input type="number" id="nbNonSal" min="0" max="8" value="0">
+          <input type="number" id="sim-nbNonSal" min="0" max="8" value="0">
         </div>
       </div>
-      <div class="hint" id="statutHint"></div>
+      <div class="sim-hint" id="sim-statutHint"></div>
     </div>
   </div>
 
-  <div class="card results">
-    <div class="res-row"><span>Coût total de la formation (HT)</span><strong id="resA">–</strong></div>
-    <div class="res-row deduct">
+  <div class="sim-card sim-results">
+    <div class="sim-res-row"><span>Coût total de la formation (HT)</span><strong id="sim-resA">–</strong></div>
+    <div class="sim-res-row sim-deduct">
       <span>Prise en charge supposée OPCO / FIF PL (HT)</span>
-      <strong><span id="resPEC">–</span><small id="resPct"></small></strong>
+      <strong><span id="sim-resPEC">–</span><small id="sim-resPct"></small></strong>
     </div>
-    <div class="res-row main tone" id="rowF"><span>Reste à charge – formation (HT)</span><strong id="resF">–</strong></div>
-    <div class="res-row main tone" id="rowFp"><span>Reste à charge – par participant (HT)</span><strong id="resFp">–</strong></div>
-    <div class="disclaimer">⚠ Simulation indicative, non contractuelle. Le montant définitif dépend de l'acceptation des dossiers de prise en charge par les organismes financeurs.</div>
+    <div class="sim-res-row sim-main sim-tone" id="sim-rowF"><span>Reste à charge – formation (HT)</span><strong id="sim-resF">–</strong></div>
+    <div class="sim-res-row sim-main sim-tone" id="sim-rowFp"><span>Reste à charge – par participant (HT)</span><strong id="sim-resFp">–</strong></div>
+    <div class="sim-disclaimer">⚠ Simulation indicative, non contractuelle. Le montant définitif dépend de l'acceptation des dossiers de prise en charge par les organismes financeurs.</div>
   </div>
-</div>
+      </div>
+      <script>
+(function(){
 
-<script>
-const $ = id => document.getElementById(id);
+const root = document.getElementById("simulateur");
+const $ = id => root.querySelector("#" + (id.startsWith("sim-") ? id : "sim-" + id));
 const eur = n => n.toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
 const API = "https://geo.api.gouv.fr/communes";
 
 /* Ajuste la taille du titre pour qu'il ait exactement la largeur du texte situé dessous */
 function ajusteTitre(){
-  const h1=$("titreH1"), sub=$("titreSub");
+  const h1=$("sim-titreH1"), sub=$("sim-titreSub");
   if(window.innerWidth<=520){ h1.style.fontSize=""; return; }
   h1.style.fontSize="20px";
   const wH=h1.getBoundingClientRect().width;
@@ -255,18 +362,18 @@ function normalise(c, cpPrefere){
 }
 function choisir(c){
   commune=c; zone=zoneDe(c);
-  $("cp").value=c.cp; $("ville").value=c.nom;
+  $("sim-cp").value=c.cp; $("sim-ville").value=c.nom;
   closeSugg();
-  $("locHint").textContent=""; $("locHint").className="hint";
+  $("sim-locHint").textContent=""; $("sim-locHint").className="hint";
   majDuree(); calcul();
 }
 function invalide(msg){
   commune=null; zone=null;
-  const h=$("locHint"); h.textContent=msg||""; h.className="hint warn";
+  const h=$("sim-locHint"); h.textContent=msg||""; h.className="hint warn";
   majDuree(); calcul();
 }
 function closeSugg(){
-  $("suggCp").classList.add("hidden"); $("suggVille").classList.add("hidden");
+  $("sim-suggCp").classList.add("hidden"); $("sim-suggVille").classList.add("hidden");
 }
 function showSugg(el, items, onPick){
   el.innerHTML="";
@@ -281,21 +388,21 @@ function showSugg(el, items, onPick){
 
 /* Saisie code postal */
 let tCp;
-$("cp").addEventListener("input",()=>{
-  const v=$("cp").value.replace(/\D/g,"").slice(0,5);
-  $("cp").value=v;
+$("sim-cp").addEventListener("input",()=>{
+  const v=$("sim-cp").value.replace(/\D/g,"").slice(0,5);
+  $("sim-cp").value=v;
   clearTimeout(tCp);
   commune=null; zone=null;
-  if(v.length<5){ $("locHint").textContent=""; $("suggCp").classList.add("hidden"); majDuree(); calcul(); return; }
+  if(v.length<5){ $("sim-locHint").textContent=""; $("sim-suggCp").classList.add("hidden"); majDuree(); calcul(); return; }
   tCp=setTimeout(async()=>{
     try{
       const data=await fetchJSON(`${API}?codePostal=${v}&${FIELDS}`);
       if(!data.length){ invalide("Code postal introuvable."); return; }
       if(data.length===1){ choisir(normalise(data[0],v)); }
       else{
-        showSugg($("suggCp"), data.map(c=>({label:`${c.nom} (${v})`, value:normalise(c,v)})), choisir);
-        $("locHint").textContent="Plusieurs communes correspondent : choisissez-en une.";
-        $("locHint").className="hint";
+        showSugg($("sim-suggCp"), data.map(c=>({label:`${c.nom} (${v})`, value:normalise(c,v)})), choisir);
+        $("sim-locHint").textContent="Plusieurs communes correspondent : choisissez-en une.";
+        $("sim-locHint").className="hint";
         majDuree(); calcul();
       }
     }catch(e){ invalide("Service de localisation indisponible. Vérifiez votre connexion."); }
@@ -304,11 +411,11 @@ $("cp").addEventListener("input",()=>{
 
 /* Saisie commune */
 let tVille;
-$("ville").addEventListener("input",()=>{
-  const v=$("ville").value.trim();
+$("sim-ville").addEventListener("input",()=>{
+  const v=$("sim-ville").value.trim();
   clearTimeout(tVille);
   commune=null; zone=null; majDuree(); calcul();
-  if(v.length<2){ $("suggVille").classList.add("hidden"); $("locHint").textContent=""; return; }
+  if(v.length<2){ $("sim-suggVille").classList.add("hidden"); $("sim-locHint").textContent=""; return; }
   tVille=setTimeout(async()=>{
     try{
       const data=await fetchJSON(`${API}?nom=${encodeURIComponent(v)}&boost=population&limit=8&${FIELDS}`);
@@ -317,11 +424,11 @@ $("ville").addEventListener("input",()=>{
         const cps=(c.codesPostaux&&c.codesPostaux.length)?c.codesPostaux:[""];
         cps.slice(0,3).forEach(cp=>items.push({label:`${c.nom} (${cp})`, value:normalise(c,cp)}));
       });
-      showSugg($("suggVille"), items.slice(0,10), choisir);
+      showSugg($("sim-suggVille"), items.slice(0,10), choisir);
     }catch(e){ invalide("Service de localisation indisponible. Vérifiez votre connexion."); }
   },250);
 });
-document.addEventListener("click",e=>{ if(!e.target.closest(".rel")) closeSugg(); });
+root.addEventListener("click",e=>{ if(!e.target.closest(".sim-rel")) closeSugg(); });
 
 /* Tarification */
 function tarifParticipant(n, lieu, zoneKey){
@@ -333,12 +440,12 @@ function tarifParticipant(n, lieu, zoneKey){
 }
 
 function majDuree(){
-  const lieu=document.querySelector('input[name=lieu]:checked').value;
-  const type=$("type").value;
+  const lieu=root.querySelector('input[name=lieu]:checked').value;
+  const type=$("sim-type").value;
   const unJourOk = lieu==="visio" || (lieu==="client" && zone && zone.key==="nantes");
   let min = unJourOk ? 1 : 2;
   if(type==="both") min=Math.max(min,4);
-  const sel=$("duree"), cur=parseInt(sel.value)||3;
+  const sel=$("sim-duree"), cur=parseInt(sel.value)||3;
   sel.innerHTML="";
   for(let j=min; j<=8; j++){
     const o=document.createElement("option");
@@ -349,19 +456,19 @@ function majDuree(){
 }
 
 function calcul(){
-  const lieu=document.querySelector('input[name=lieu]:checked').value;
-  const n=Math.min(8,Math.max(1,parseInt($("nbPart").value)||1));
-  const duree=parseInt($("duree").value)||3;
-  const sal=Math.max(0,parseInt($("nbSal").value)||0);
-  const nonSal=Math.max(0,parseInt($("nbNonSal").value)||0);
+  const lieu=root.querySelector('input[name=lieu]:checked').value;
+  const n=Math.min(8,Math.max(1,parseInt($("sim-nbPart").value)||1));
+  const duree=parseInt($("sim-duree").value)||3;
+  const sal=Math.max(0,parseInt($("sim-nbSal").value)||0);
+  const nonSal=Math.max(0,parseInt($("sim-nbNonSal").value)||0);
 
-  const sh=$("statutHint");
+  const sh=$("sim-statutHint");
   if(sal+nonSal!==n){
     sh.textContent=`Le total (${sal+nonSal}) doit être égal au nombre de participants (${n}).`;
     sh.className="hint warn";
   } else { sh.textContent=""; sh.className="hint"; }
 
-  $("blocLocalisation").classList.toggle("hidden", lieu==="visio");
+  $("sim-blocLocalisation").classList.toggle("hidden", lieu==="visio");
 
   let D=0;
   if(lieu==="client"){
@@ -379,21 +486,21 @@ function calcul(){
 }
 
 function affiche(r){
-  const rows=[$("rowF"),$("rowFp")];
+  const rows=[$("sim-rowF"),$("sim-rowFp")];
   rows.forEach(x=>x.classList.remove("vert","orange","rouge"));
   if(!r){
-    ["resA","resPEC","resF","resFp"].forEach(i=>$(i).textContent="–");
-    $("resPct").textContent="";
-    $("rowFp").classList.add("hidden");
+    ["sim-resA","sim-resPEC","sim-resF","sim-resFp"].forEach(i=>$(i).textContent="–");
+    $("sim-resPct").textContent="";
+    $("sim-rowFp").classList.add("hidden");
     return;
   }
-  $("resA").textContent=eur(r.A);
-  $("resPEC").textContent="− "+eur(r.pec);
+  $("sim-resA").textContent=eur(r.A);
+  $("sim-resPEC").textContent="− "+eur(r.pec);
   const pctPec = r.A>0 ? Math.round(r.pec/r.A*100) : 0;
-  $("resPct").textContent=`(${pctPec} %)`;
-  $("resF").textContent=eur(r.F);
-  $("resFp").textContent=eur(r.F/r.n);
-  $("rowFp").classList.toggle("hidden", r.n===1);
+  $("sim-resPct").textContent=`(${pctPec} %)`;
+  $("sim-resF").textContent=eur(r.F);
+  $("sim-resFp").textContent=eur(r.F/r.n);
+  $("sim-rowFp").classList.toggle("hidden", r.n===1);
 
   /* Couleur selon la part du reste à charge dans le prix de la formation :
      faible = vert, intermédiaire = orange, élevé = rouge */
@@ -403,24 +510,43 @@ function affiche(r){
 }
 
 /* Événements */
-document.querySelectorAll('input[name=lieu]').forEach(r=>r.addEventListener("change",()=>{majDuree();calcul();}));
-$("type").addEventListener("change",()=>{majDuree();calcul();});
-$("duree").addEventListener("change",calcul);
-$("nbPart").addEventListener("input",()=>{
-  const n=Math.min(8,Math.max(1,parseInt($("nbPart").value)||1));
-  $("nbPart").value=n; $("nbSal").value=n; $("nbNonSal").value=0; calcul();
+root.querySelectorAll('input[name=lieu]').forEach(r=>r.addEventListener("change",()=>{majDuree();calcul();}));
+$("sim-type").addEventListener("change",()=>{majDuree();calcul();});
+$("sim-duree").addEventListener("change",calcul);
+$("sim-nbPart").addEventListener("input",()=>{
+  const n=Math.min(8,Math.max(1,parseInt($("sim-nbPart").value)||1));
+  $("sim-nbPart").value=n; $("sim-nbSal").value=n; $("sim-nbNonSal").value=0; calcul();
 });
-$("nbSal").addEventListener("input",()=>{
-  const n=parseInt($("nbPart").value)||1;
-  $("nbNonSal").value=Math.max(0,n-(parseInt($("nbSal").value)||0)); calcul();
+$("sim-nbSal").addEventListener("input",()=>{
+  const n=parseInt($("sim-nbPart").value)||1;
+  $("sim-nbNonSal").value=Math.max(0,n-(parseInt($("sim-nbSal").value)||0)); calcul();
 });
-$("nbNonSal").addEventListener("input",()=>{
-  const n=parseInt($("nbPart").value)||1;
-  $("nbSal").value=Math.max(0,n-(parseInt($("nbNonSal").value)||0)); calcul();
+$("sim-nbNonSal").addEventListener("input",()=>{
+  const n=parseInt($("sim-nbPart").value)||1;
+  $("sim-nbSal").value=Math.max(0,n-(parseInt($("sim-nbNonSal").value)||0)); calcul();
 });
 
-majDuree(); $("duree").value=3; calcul();
+majDuree(); $("sim-duree").value=3; calcul();
 ajusteTitre();
+
+})();
 </script>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Christophe Fortineau – Formateur Archicad indépendant et certifié<br>
+    Tél. : <a href="tel:+33662582547">+33 662 582 547</a> · E-mail : <a href="/cdn-cgi/l/email-protection#a3c0cbd1cad0d7ccd3cbc6c5ccd1d7cacdc6c2d6e3c4cec2cacf8dc0ccce"><span class="__cf_email__" data-cfemail="c5a6adb7acb6b1aab5ada0a3aab7b1acaba0a4b085a2a8a4aca9eba6aaa8">[email&#160;protected]</span></a><br>
+    Formateur indépendant intervenant au sein de la société PRIUM FORMATION.<br>
+    PRIUM FORMATION – SASU au capital de 10 000 € – 1 Parvis de la Défense, 92800 Puteaux – SIREN 837 988 823 – SIRET 837 988 823 00022 – APE 8559A (formation continue d'adultes) – Immatriculée au RNE le 27/03/2018 – Présidée par PRIUM INVESTMENT GROUP.<br>
+    N° de déclaration d'activité : [À COMPLÉTER] (cet enregistrement ne vaut pas agrément de l'État) – Certification Qualiopi n° [À COMPLÉTER], au titre de la catégorie : actions de formation.<br>
+    Informations légales : <a href="https://data.inpi.fr" target="_blank" rel="noopener">data.inpi.fr</a> · Simulateur de coût : <a href="#simulateur">Simulation coût formation</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
