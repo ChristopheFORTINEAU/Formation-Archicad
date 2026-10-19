@@ -15,7 +15,10 @@
   .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
   .row{display:grid;grid-template-columns:260px 1fr;gap:40px;padding:56px 0;border-bottom:1px solid var(--ligne)}
   .row:last-of-type{border-bottom:none}
-  .label{font-weight:400;color:var(--txt)}
+  .label{font-family:var(--font);font-size:1.1rem;font-weight:400;line-height:1.5;letter-spacing:-.01em;text-transform:none;color:var(--txt)}
+  .row > .content > ul{list-style:none;margin:0 0 1.2em;padding:0}
+  .row > .content > ul > li{position:relative;margin:0 0 .8em;padding-left:24px}
+  .row > .content > ul > li::before{content:"";position:absolute;left:0;top:.75em;width:13px;height:1px;background:#999}
   .content p{margin:0 0 1.1em;max-width:760px}
   .content p:last-child{margin-bottom:0}
   .intro{padding:72px 0 56px}
@@ -41,6 +44,89 @@
     .intro h1{font-size:2rem}
   }
   @media (max-width:560px){.formats{grid-template-columns:1fr}}
+  /* Police unique : la première partie définit Inter via --font. */
+  *, *::before, *::after, input, select, textarea, button, label, legend, option, table, th, td {
+    font-family: var(--font) !important;
+    letter-spacing: inherit !important;
+    text-transform: none !important;
+    font-style: inherit !important;
+    font-variant: inherit !important;
+  }
+  body { font-family: var(--font) !important; }
+</style>
+<style>
+  /* Harmonisation finale demandée : une seule échelle typographique et des traits neutres. */
+  :root { --uniform-size: 1.1rem; --line: #d9d9d9; }
+  body, body * { font-family: inherit !important; font-size: var(--uniform-size) !important; }
+  body { color: #1a1a1a !important; background: #fff !important; }
+  .page-qualiopi { display:block; width:max-content; margin:18px 0 0; line-height:0; }
+  .page-qualiopi img { display:block; width:auto; height:58px; }
+  .row, footer { border-color: var(--line) !important; border-width:1px !important; }
+  .row:last-of-type { border-bottom: 1px solid var(--line) !important; }
+  .label, .intro .role { color:#1a1a1a !important; font-weight:400 !important; }
+  .intro h1 { font-weight:400 !important; }
+  .format, .format h3 { border-color:var(--line) !important; }
+  .sim-card, .sim-titre, .sim-results, .sim-res-row, .sim-disclaimer,
+  #simulateur .sim-card, #simulateur .sim-titre, #simulateur .sim-results { background:transparent !important; border:0 !important; box-shadow:none !important; color:#1a1a1a !important; }
+  #simulateur .sim-card { padding-left:0 !important; padding-right:0 !important; }
+  #simulateur .sim-card:first-child { padding-top:0 !important; }
+  #simulateur .sim-field { border-top:0 !important; }
+  #simulateur label, #simulateur .sim-label, #simulateur legend { color:#1a1a1a !important; font-weight:400 !important; }
+  #simulateur input, #simulateur select, #simulateur textarea,
+  #simulateur .sim-radio { border:1px solid var(--line) !important; border-radius:0 !important; background:#fff !important; color:#777 !important; }
+  #simulateur input, #simulateur select, #simulateur textarea { padding:11px 12px !important; }
+  #simulateur select { appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238c8c8c' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important; background-repeat:no-repeat !important; background-position:right 12px center !important; padding-right:28px !important; }
+  #simulateur .sim-radio { padding:11px 12px !important; }
+  #simulateur input[type=radio] { width:auto; padding:0 !important; border:0 !important; background:transparent !important; }
+  #simulateur input:focus, #simulateur select:focus { outline:1px solid #aaa !important; border-color:var(--line) !important; }
+  #simulateur .sim-res-row { padding:10px 0 !important; border-bottom:0 !important; }
+  #simulateur .sim-res-row span:first-child, #simulateur .sim-res-row strong,
+  #simulateur .sim-res-row.sim-main strong, #simulateur .sim-res-row.sim-deduct strong { font-size:var(--uniform-size) !important; opacity:1 !important; }
+  #simulateur .sim-res-row.sim-deduct strong, #simulateur .sim-res-row.sim-tone strong,
+  #simulateur .sim-res-row.sim-tone.vert strong, #simulateur .sim-res-row.sim-tone.orange strong,
+  #simulateur .sim-res-row.sim-tone.rouge strong { color:#c0392b !important; }
+  #simulateur .sim-res-row.sim-tone.orange strong { color:#e67e22 !important; }
+  #simulateur .sim-res-row.sim-tone.vert strong { color:#2e7d32 !important; }
+  #simulateur .sim-rowF strong, #simulateur .sim-rowFp strong { font-weight:700 !important; }
+  #simulateur .sim-res-row:first-child strong { color:#1a1a1a !important; }
+  #simulateur .sim-res-row:last-of-type { border-bottom:0 !important; }
+  #simulateur .sim-disclaimer { border-bottom:0 !important; margin-top:16px !important; font-size:12px !important; color:#aaa !important; opacity:1 !important; }
+  #simulateur .sim-radio:has(input:checked) { border-color:var(--line) !important; background:#fff !important; }
+  .row > .content > ul > li::before { background:#999 !important; width:10px !important; height:1px !important; }
+  footer { font-style:normal !important; }
+
+  /* En-tête : le logo Qualiopi est rattaché au bloc de présentation. */
+  .intro .content { position:relative; }
+  .intro .page-qualiopi {
+    position:absolute;
+    top:0;
+    right:0;
+    margin:0;
+  }
+  .intro .page-qualiopi img { height:58px; width:auto; }
+  .intro h1 {
+    font-size:1.265rem !important;
+    font-weight:700 !important;
+    padding-right:150px;
+  }
+  .intro .role {
+    color:#777 !important;
+    font-weight:400 !important;
+    padding-right:150px;
+  }
+  footer, footer * {
+    font-size:12px !important;
+    color:#aaa !important;
+  }
+  @media (max-width:900px) {
+    .intro .content { display:flex; flex-wrap:wrap; align-items:flex-start; }
+    .intro h1, .intro .role { padding-right:0; width:100%; }
+    .intro .page-qualiopi {
+      position:static;
+      order:3;
+      margin:18px 0 0;
+    }
+  }
 </style>
 </head>
 <body>
@@ -52,6 +138,9 @@
       <img class="portrait" src="portrait.jpg" alt="Christophe Fortineau, architecte et formateur Archicad">
     </div>
     <div class="content">
+      <a class="page-qualiopi" href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation" target="_blank" rel="noopener" title="Organisme certifié Qualiopi">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRObiuRPHPYlaq1IgiUdpUR7ETxCvYdSa7r_DWy5rK8Hw&s=10" alt="Certifié Qualiopi">
+      </a>
       <h1>Christophe Fortineau</h1>
       <p class="role">Formateur BIM Archicad indépendant et certifié</p>
     </div>
@@ -72,22 +161,22 @@
     <div class="content">
       <div class="formats">
         <div class="format">
-          <h3>Initiation Archicad</h3>
+          <h3>Archicad initiation</h3>
           <div class="duree">3 à 4 jours</div>
           <p>Les bases d'une méthode de travail BIM solide : interface, modélisation, documentation et mise en page d'un projet, de la conception aux plans.</p>
         </div>
         <div class="format">
-          <h3>Perfectionnement Archicad</h3>
+          <h3>Archicad perfectionnement</h3>
           <div class="duree">3 à 4 jours</div>
           <p>Gagner en efficacité et en fiabilité : bibliothèques, gabarits, optimisation du modèle, collaboration et production de documents.</p>
         </div>
         <div class="format">
-          <h3>Initiation + Perfectionnement</h3>
+          <h3>Archicad initiation et perfectionnement</h3>
           <div class="duree">4 à 8 jours</div>
           <p>Un parcours complet, de la prise en main à la maîtrise, adapté au niveau et aux pratiques de votre agence.</p>
         </div>
         <div class="format">
-          <h3>Expertise Archicad</h3>
+          <h3>Archicad expertise</h3>
           <div class="duree">1 à 2 jours</div>
           <p>Des sessions ciblées sur un thème précis (gabarit d'agence, rendu, collaboration…) pour lever un blocage ou monter en compétence rapidement.</p>
         </div>
@@ -117,15 +206,13 @@
     --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --muted:#6b7385;
     --line:#e3e6ec; --accent:#2f5bea; --accent-soft:#eaf0ff;
   }
-#simulateur *{box-sizing:border-box}
+#simulateur, #simulateur *{box-sizing:border-box; font-family:var(--font)}
 #simulateur body{
     margin:0; background:var(--bg); color:var(--ink);
-    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.5; padding:32px 16px;
   }
 #simulateur .wrap{max-width:640px; margin:0 auto}
 #simulateur .sim-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px}
-
   /* Titre : même esthétique que les totaux */
 #simulateur .sim-titre{
     background:var(--ink); color:#fff; border:none;
@@ -146,6 +233,8 @@
     transition:opacity .2s;
   }
 #simulateur .sim-qualiopi:hover img{opacity:.85}
+
+#simulateur label, #simulateur legend, #simulateur input, #simulateur select, #simulateur textarea, #simulateur button, #simulateur option, #simulateur table, #simulateur th, #simulateur td{font-family:inherit}
 
 #simulateur .sim-field{margin-bottom:20px}
 #simulateur .sim-field:last-child{margin-bottom:0}
@@ -184,16 +273,7 @@
 #simulateur .sim-res-row.sim-main strong{font-size:1.7rem}
 #simulateur .sim-res-row.sim-deduct strong{color:#8fe3a8}
 #simulateur .sim-res-row.sim-deduct small{font-weight:400; font-size:.8rem; opacity:.75; margin-left:6px}
-
-  /* Les deux derniers totaux : colorés selon le résultat (teintes douces) */
-#simulateur .sim-res-row.sim-tone{margin:6px -12px; padding:12px; border-radius:10px; border-bottom:none; transition:background .3s}
-#simulateur .sim-res-row.sim-tone.vert{background:rgba(143,214,166,.20)}
-#simulateur .sim-res-row.sim-tone.vert strong{color:#b6ecc7}
-#simulateur .sim-res-row.sim-tone.orange{background:rgba(240,190,120,.20)}
-#simulateur .sim-res-row.sim-tone.orange strong{color:#f6d29b}
-#simulateur .sim-res-row.sim-tone.rouge{background:rgba(232,140,140,.20)}
-#simulateur .sim-res-row.sim-tone.rouge strong{color:#f3b3b3}
-#simulateur .sim-disclaimer{font-size:.8rem; opacity:.7; margin-top:16px}
+#simulateur .sim-disclaimer{font-size:.8rem; opacity:.7; margin-top:16px; border-bottom:none}
 
 #simulateur .sim-financeurs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
 #simulateur .sim-mini{display:flex; flex-direction:column; gap:6px}
@@ -210,25 +290,78 @@
 #simulateur .sim-titre h1, #simulateur .sim-titre .sim-sub{white-space:normal}
 #simulateur .sim-qualiopi img{height:52px}
   }
+      /* Corrections d’harmonisation : même typographie et surface que la page principale. */
+      #simulateur, #simulateur *, #simulateur *::before, #simulateur *::after,
+      #simulateur input, #simulateur select, #simulateur textarea, #simulateur button,
+      #simulateur label, #simulateur legend, #simulateur option, #simulateur table,
+      #simulateur th, #simulateur td { font-family: inherit !important; }
+      #simulateur label, #simulateur .sim-label, #simulateur legend {
+        letter-spacing: inherit !important; text-transform: none !important;
+        font-style: normal !important; font-variant: normal !important;
+      }
+      #simulateur .simulator-content { background: transparent; }
+      #simulateur .sim-card, #simulateur .sim-titre, #simulateur .sim-results {
+        background: transparent; color: var(--txt); border: 0; border-radius: 0;
+        box-shadow: none; padding-left: 0; padding-right: 0;
+      }
+      #simulateur .sim-titre { align-items: flex-start; }
+      #simulateur .sim-titre h1 { color: var(--txt); font-weight: 400; }
+      #simulateur .sim-titre .sim-sub { color: var(--gris); font-style: normal; }
+      #simulateur .sim-qualiopi { background: transparent; border: 0; }
+      #simulateur .sim-qualiopi img { background: transparent; border: 0; border-radius: 0; }
+      #simulateur input, #simulateur select, #simulateur textarea {
+        border: 0; border-radius: 0; background: transparent; box-shadow: none;
+      }
+      #simulateur input:focus, #simulateur select:focus, #simulateur textarea:focus {
+        outline: 0; border: 0; box-shadow: none;
+      }
+      #simulateur .sim-sugg { border: 0; box-shadow: none; }
+      #simulateur .sim-res-row { border-bottom: 0; color: var(--txt); }
+      #simulateur .sim-res-row span:first-child { opacity: 1; }
+      #simulateur .sim-res-row.sim-deduct strong { color: inherit; }
+      #simulateur .sim-res-row.sim-tone,
+      #simulateur .sim-res-row.sim-tone.vert,
+      #simulateur .sim-res-row.sim-tone.orange,
+      #simulateur .sim-res-row.sim-tone.rouge { margin: 0; padding: 10px 0; background: transparent; border: 0; }
+      #simulateur .sim-disclaimer { opacity: .7; }
+      #simulateur .sim-sugg { border: 1px solid var(--line); }
+      #simulateur .sim-radio { border: 0; border-radius: 0; padding-left: 0; }
+      #simulateur .sim-radio:has(input:checked) { border: 0; background: transparent; }
+
+      /* Formulaire : labels uniformes, selects sans cadre et nombres cadrés. */
+      #simulateur label, #simulateur .sim-label, #simulateur legend {
+        font-family: var(--font) !important; font-size: 13px; font-weight: 400;
+        line-height: 1.35; color: var(--txt);
+      }
+      #simulateur select {
+        appearance: none; -webkit-appearance: none;
+        border: 0; border-radius: 0; background-color: transparent;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238c8c8c' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 4px center;
+        padding: 11px 20px 11px 0;
+      }
+      #simulateur input[type="number"] {
+        border: 1px solid #ddd; border-radius: 6px; background: #fff;
+        padding: 11px 6px;
+      }
+      #simulateur .sim-res-row.sim-tone {
+        background: transparent; border: 0; color: var(--txt);
+      }
+      #simulateur .sim-res-row.sim-tone strong { color: var(--accent); }
+      #simulateur .sim-res-row.sim-tone.vert strong,
+      #simulateur .sim-res-row.sim-tone.orange strong,
+      #simulateur .sim-res-row.sim-tone.rouge strong { color: var(--accent); }
+
       </style>
       <div class="simulator-content">
-<div class="sim-card sim-titre">
-    <div class="sim-titre-txt">
-      <h1 id="sim-titreH1">Formation BIM Archicad</h1>
-      <p class="sim-sub" id="sim-titreSub">Simulation reste à charge après financements OPCO / FIF PL.</p>
-    </div>
-    <a class="sim-qualiopi" href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation" target="_blank" rel="noopener" title="Organisme certifié Qualiopi">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRObiuRPHPYlaq1IgiUdpUR7ETxCvYdSa7r_DWy5rK8Hw&s=10" alt="Certifié Qualiopi">
-    </a>
-  </div>
-
   <div class="sim-card">
     <div class="sim-field">
       <label for="type">Type de formation</label>
       <select id="sim-type">
-        <option value="init">Initiation Archicad</option>
-        <option value="perf">Perfectionnement Archicad</option>
-        <option value="both">Initiation et perfectionnement Archicad</option>
+        <option value="init">Archicad initiation</option>
+        <option value="perf">Archicad perfectionnement</option>
+        <option value="both">Archicad initiation et perfectionnement</option>
+        <option value="expertise">Archicad expertise</option>
       </select>
     </div>
 
@@ -255,11 +388,11 @@
       <span class="sim-label">Localisation de la formation</span>
       <div class="sim-row">
         <div class="sim-rel">
-          <input type="text" id="sim-cp" inputmode="numeric" maxlength="5" placeholder="Code postal" autocomplete="off">
+          <input type="text" id="sim-cp" inputmode="numeric" maxlength="5" value="75000" placeholder="Code postal" autocomplete="off">
           <div class="sim-sugg sim-hidden" id="sim-suggCp"></div>
         </div>
         <div class="sim-rel">
-          <input type="text" id="sim-ville" placeholder="Commune" autocomplete="off">
+          <input type="text" id="sim-ville" value="Paris" placeholder="Commune" autocomplete="off">
           <div class="sim-sugg sim-hidden" id="sim-suggVille"></div>
         </div>
       </div>
@@ -280,11 +413,12 @@
       </div>
       <div class="sim-hint" id="sim-statutHint"></div>
     </div>
+
   </div>
 
   <div class="sim-card sim-results">
     <div class="sim-res-row"><span>Coût total de la formation (HT)</span><strong id="sim-resA">–</strong></div>
-    <div class="sim-res-row sim-deduct">
+    <div class="sim-res-row sim-deduct sim-tone" id="sim-rowPEC">
       <span>Prise en charge supposée OPCO / FIF PL (HT)</span>
       <strong><span id="sim-resPEC">–</span><small id="sim-resPct"></small></strong>
     </div>
@@ -300,19 +434,6 @@ const root = document.getElementById("simulateur");
 const $ = id => root.querySelector("#" + (id.startsWith("sim-") ? id : "sim-" + id));
 const eur = n => n.toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
 const API = "https://geo.api.gouv.fr/communes";
-
-/* Ajuste la taille du titre pour qu'il ait exactement la largeur du texte situé dessous */
-function ajusteTitre(){
-  const h1=$("sim-titreH1"), sub=$("sim-titreSub");
-  if(window.innerWidth<=520){ h1.style.fontSize=""; return; }
-  h1.style.fontSize="20px";
-  const wH=h1.getBoundingClientRect().width;
-  const wS=sub.scrollWidth;
-  if(wH>0) h1.style.fontSize=(20*wS/wH)+"px";
-}
-window.addEventListener("resize",ajusteTitre);
-window.addEventListener("load",ajusteTitre);
-if(document.fonts&&document.fonts.ready) document.fonts.ready.then(ajusteTitre);
 
 /* Point de départ : Bouguenais */
 const BASE = {lat:47.1797, lon:-1.6200};
@@ -344,7 +465,8 @@ function zoneDe(c){
   return           {key:"t120p",tarif:220};
 }
 
-let commune=null, zone=null;
+const DEFAULT_COMMUNE = {nom:"Paris", code:"75056", cp:"75000", lat:48.8566, lon:2.3522};
+let commune=DEFAULT_COMMUNE, zone=zoneDe(DEFAULT_COMMUNE);
 
 async function fetchJSON(url){
   const r=await fetch(url); if(!r.ok) throw new Error("API");
@@ -364,16 +486,16 @@ function choisir(c){
   commune=c; zone=zoneDe(c);
   $("sim-cp").value=c.cp; $("sim-ville").value=c.nom;
   closeSugg();
-  $("sim-locHint").textContent=""; $("sim-locHint").className="hint";
+  $("sim-locHint").textContent=""; $("sim-locHint").className="sim-hint";
   majDuree(); calcul();
 }
 function invalide(msg){
   commune=null; zone=null;
-  const h=$("sim-locHint"); h.textContent=msg||""; h.className="hint warn";
+  const h=$("sim-locHint"); h.textContent=msg||""; h.className="sim-hint warn";
   majDuree(); calcul();
 }
 function closeSugg(){
-  $("sim-suggCp").classList.add("hidden"); $("sim-suggVille").classList.add("hidden");
+  $("sim-suggCp").classList.add("sim-hidden"); $("sim-suggVille").classList.add("sim-hidden");
 }
 function showSugg(el, items, onPick){
   el.innerHTML="";
@@ -383,7 +505,7 @@ function showSugg(el, items, onPick){
     d.addEventListener("mousedown",e=>{e.preventDefault(); onPick(it.value);});
     el.appendChild(d);
   });
-  el.classList.toggle("hidden", !items.length);
+  el.classList.toggle("sim-hidden", !items.length);
 }
 
 /* Saisie code postal */
@@ -393,7 +515,7 @@ $("sim-cp").addEventListener("input",()=>{
   $("sim-cp").value=v;
   clearTimeout(tCp);
   commune=null; zone=null;
-  if(v.length<5){ $("sim-locHint").textContent=""; $("sim-suggCp").classList.add("hidden"); majDuree(); calcul(); return; }
+  if(v.length<5){ $("sim-locHint").textContent=""; $("sim-suggCp").classList.add("sim-hidden"); majDuree(); calcul(); return; }
   tCp=setTimeout(async()=>{
     try{
       const data=await fetchJSON(`${API}?codePostal=${v}&${FIELDS}`);
@@ -402,7 +524,7 @@ $("sim-cp").addEventListener("input",()=>{
       else{
         showSugg($("sim-suggCp"), data.map(c=>({label:`${c.nom} (${v})`, value:normalise(c,v)})), choisir);
         $("sim-locHint").textContent="Plusieurs communes correspondent : choisissez-en une.";
-        $("sim-locHint").className="hint";
+        $("sim-locHint").className="sim-hint";
         majDuree(); calcul();
       }
     }catch(e){ invalide("Service de localisation indisponible. Vérifiez votre connexion."); }
@@ -415,7 +537,7 @@ $("sim-ville").addEventListener("input",()=>{
   const v=$("sim-ville").value.trim();
   clearTimeout(tVille);
   commune=null; zone=null; majDuree(); calcul();
-  if(v.length<2){ $("sim-suggVille").classList.add("hidden"); $("sim-locHint").textContent=""; return; }
+  if(v.length<2){ $("sim-suggVille").classList.add("sim-hidden"); $("sim-locHint").textContent=""; return; }
   tVille=setTimeout(async()=>{
     try{
       const data=await fetchJSON(`${API}?nom=${encodeURIComponent(v)}&boost=population&limit=8&${FIELDS}`);
@@ -445,9 +567,11 @@ function majDuree(){
   const unJourOk = lieu==="visio" || (lieu==="client" && zone && zone.key==="nantes");
   let min = unJourOk ? 1 : 2;
   if(type==="both") min=Math.max(min,4);
+  if(type==="expertise") min=Math.max(min,1);
   const sel=$("sim-duree"), cur=parseInt(sel.value)||3;
   sel.innerHTML="";
-  for(let j=min; j<=8; j++){
+  const max = type==="expertise" ? 2 : 8;
+  for(let j=min; j<=max; j++){
     const o=document.createElement("option");
     o.value=j; o.textContent=j+(j>1?" jours":" jour");
     sel.appendChild(o);
@@ -465,10 +589,10 @@ function calcul(){
   const sh=$("sim-statutHint");
   if(sal+nonSal!==n){
     sh.textContent=`Le total (${sal+nonSal}) doit être égal au nombre de participants (${n}).`;
-    sh.className="hint warn";
-  } else { sh.textContent=""; sh.className="hint"; }
+    sh.className="sim-hint warn";
+  } else { sh.textContent=""; sh.className="sim-hint"; }
 
-  $("sim-blocLocalisation").classList.toggle("hidden", lieu==="visio");
+  $("sim-blocLocalisation").classList.toggle("sim-hidden", lieu==="visio");
 
   let D=0;
   if(lieu==="client"){
@@ -486,28 +610,34 @@ function calcul(){
   affiche({A, pec:pecEff, F, n});
 }
 
+function toneClass(taux){
+  if(taux < 25) return "rouge";
+  if(taux < 50) return "orange";
+  return "vert";
+}
+function applyTone(taux){
+  const tone=toneClass(taux);
+  [$("sim-rowPEC"),$("sim-rowF"),$("sim-rowFp")].forEach(row=>{
+    row.classList.remove("rouge","orange","vert"); row.classList.add(tone);
+  });
+}
 function affiche(r){
   const rows=[$("sim-rowF"),$("sim-rowFp")];
-  rows.forEach(x=>x.classList.remove("vert","orange","rouge"));
   if(!r){
     ["sim-resA","sim-resPEC","sim-resF","sim-resFp"].forEach(i=>$(i).textContent="–");
     $("sim-resPct").textContent="";
-    $("sim-rowFp").classList.add("hidden");
+    $("sim-rowFp").classList.add("sim-hidden");
+    [$("sim-rowPEC"),$("sim-rowF"),$("sim-rowFp")].forEach(row=>row.classList.remove("rouge","orange","vert"));
     return;
   }
   $("sim-resA").textContent=eur(r.A);
   $("sim-resPEC").textContent="− "+eur(r.pec);
   const pctPec = r.A>0 ? Math.round(r.pec/r.A*100) : 0;
   $("sim-resPct").textContent=`(${pctPec} %)`;
+  applyTone(pctPec);
   $("sim-resF").textContent=eur(r.F);
   $("sim-resFp").textContent=eur(r.F/r.n);
-  $("sim-rowFp").classList.toggle("hidden", r.n===1);
-
-  /* Couleur selon la part du reste à charge dans le prix de la formation :
-     faible = vert, intermédiaire = orange, élevé = rouge */
-  const ratio = r.A>0 ? r.F/r.A : 0;
-  const cls = ratio>0.5 ? "rouge" : (ratio>0.25 ? "orange" : "vert");
-  rows.forEach(x=>x.classList.add(cls));
+  $("sim-rowFp").classList.toggle("sim-hidden", r.n===1);
 }
 
 /* Événements */
@@ -526,9 +656,7 @@ $("sim-nbNonSal").addEventListener("input",()=>{
   const n=parseInt($("sim-nbPart").value)||1;
   $("sim-nbSal").value=Math.max(0,n-(parseInt($("sim-nbNonSal").value)||0)); calcul();
 });
-
 majDuree(); $("sim-duree").value=3; calcul();
-ajusteTitre();
 
 })();
 </script>
@@ -539,16 +667,16 @@ ajusteTitre();
 
 <footer>
   <div class="wrap">
-    Christophe Fortineau – Formateur Archicad indépendant et certifié<br>
-    Tél. : <a href="tel:+33662582547">+33 662 582 547</a> · E-mail : <a href="/cdn-cgi/l/email-protection#a3c0cbd1cad0d7ccd3cbc6c5ccd1d7cacdc6c2d6e3c4cec2cacf8dc0ccce"><span class="__cf_email__" data-cfemail="c5a6adb7acb6b1aab5ada0a3aab7b1acaba0a4b085a2a8a4aca9eba6aaa8">[email&#160;protected]</span></a><br>
-    Formateur indépendant intervenant au sein de la société PRIUM FORMATION.<br>
+    Christophe Fortineau – Formateur BIM Archicad indépendant et certifié au sein de la société PRIUM FORMATION.<br>
+    Tél. : +33 662 582 547 · E-mail : christophefortineau[a]gmail.com<br>
+    <br>
     PRIUM FORMATION – SASU au capital de 10 000 € – 1 Parvis de la Défense, 92800 Puteaux – SIREN 837 988 823 – SIRET 837 988 823 00022 – APE 8559A (formation continue d'adultes) – Immatriculée au RNE le 27/03/2018 – Présidée par PRIUM INVESTMENT GROUP.<br>
-    N° de déclaration d'activité : [À COMPLÉTER] (cet enregistrement ne vaut pas agrément de l'État) – Certification Qualiopi n° [À COMPLÉTER], au titre de la catégorie : actions de formation.<br>
-    Informations légales : <a href="https://data.inpi.fr" target="_blank" rel="noopener">data.inpi.fr</a> · Simulateur de coût : <a href="#simulateur">Simulation coût formation</a>
+    N° de déclaration d'activité : 11755756775<br>
+    Catégorie certifiée Qualiopi : Actions de formation (L.. 6331-1 – 1° : actions de formation)<br>
+    Informations légales : <a href="https://data.inpi.fr" target="_blank" rel="noopener">data.inpi.fr</a> ·
   </div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
