@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulateur reste à charge – Formation BIM Archicad</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --muted:#6b7385;
+    --line:#e3e6ec; --accent:#2f5bea; --accent-soft:#eaf0ff;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; padding:32px 16px;
+  }
+  .wrap{max-width:640px; margin:0 auto}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px}
+
+  /* Titre : même esthétique que les totaux */
+  .titre{
+    background:var(--ink); color:#fff; border:none;
+    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .titre-txt{display:inline-block}
+  /* Le titre est ajusté en JS pour avoir la largeur exacte du sous-titre */
+  .titre h1{
+    margin:0 0 6px; font-weight:700; line-height:1.1;
+    white-space:nowrap; font-size:1.4rem; display:inline-block;
+  }
+  .titre .sub{
+    display:block; margin:0; font-size:.85rem; font-style:italic; color:#aeb3bf; white-space:nowrap;
+  }
+  .qualiopi{display:inline-block; line-height:0; flex:none}
+  .qualiopi img{
+    height:64px; width:auto; display:block; border-radius:6px; background:#fff;
+    transition:opacity .2s;
+  }
+  .qualiopi:hover img{opacity:.85}
+
+  .field{margin-bottom:20px}
+  .field:last-child{margin-bottom:0}
+  label, .label{display:block; font-weight:600; font-size:.9rem; margin-bottom:8px}
+  input[type=number], input[type=text], select{
+    width:100%; padding:11px 12px; font-size:1rem;
+    border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
+  }
+  input:focus, select:focus{outline:2px solid var(--accent); border-color:transparent}
+
+  /* Flèches des champs numériques agrandies */
+  input[type=number]{padding-right:6px}
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button{
+    opacity:1; height:34px; width:30px; cursor:pointer;
+  }
+  input[type=number]{-moz-appearance:number-input}
+
+  .row{display:grid; grid-template-columns:1fr 2fr; gap:12px}
+  .radios{display:grid; gap:8px}
+  .radio{
+    display:flex; align-items:center; gap:10px; padding:11px 12px;
+    border:1px solid var(--line); border-radius:8px; cursor:pointer; font-weight:400; margin:0;
+  }
+  .radio:has(input:checked){border-color:var(--accent); background:var(--accent-soft)}
+  .hint{font-size:.82rem; color:var(--muted); margin-top:6px; min-height:1em}
+  .hint.warn{color:#b45309}
+  .hidden{display:none !important}
+
+  /* Résultats */
+  .results{background:var(--ink); color:#fff; border:none}
+  .res-row{display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.12)}
+  .res-row:last-of-type{border-bottom:none}
+  .res-row span:first-child{font-size:.92rem; opacity:.85}
+  .res-row strong{font-size:1.25rem; text-align:right}
+  .res-row.main strong{font-size:1.7rem}
+  .res-row.deduct strong{color:#8fe3a8}
+  .res-row.deduct small{font-weight:400; font-size:.8rem; opacity:.75; margin-left:6px}
+
+  /* Les deux derniers totaux : colorés selon le résultat (teintes douces) */
+  .res-row.tone{margin:6px -12px; padding:12px; border-radius:10px; border-bottom:none; transition:background .3s}
+  .res-row.tone.vert{background:rgba(143,214,166,.20)}
+  .res-row.tone.vert strong{color:#b6ecc7}
+  .res-row.tone.orange{background:rgba(240,190,120,.20)}
+  .res-row.tone.orange strong{color:#f6d29b}
+  .res-row.tone.rouge{background:rgba(232,140,140,.20)}
+  .res-row.tone.rouge strong{color:#f3b3b3}
+  .disclaimer{font-size:.8rem; opacity:.7; margin-top:16px}
+
+  .financeurs{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  .mini{display:flex; flex-direction:column; gap:6px}
+  .sugg{
+    position:absolute; left:0; right:0; top:100%; z-index:10; background:#fff;
+    border:1px solid var(--line); border-radius:8px; margin-top:4px;
+    max-height:220px; overflow:auto; box-shadow:0 6px 20px rgba(0,0,0,.08);
+  }
+  .sugg div{padding:9px 12px; cursor:pointer; font-size:.95rem}
+  .sugg div:hover{background:var(--accent-soft)}
+  .rel{position:relative}
+
+  @media (max-width:520px){
+    .titre h1, .titre .sub{white-space:normal}
+    .qualiopi img{height:52px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card titre">
+    <div class="titre-txt">
+      <h1 id="titreH1">Formation BIM Archicad</h1>
+      <p class="sub" id="titreSub">Simulation reste à charge après financements OPCO / FIF PL.</p>
+    </div>
+    <a class="qualiopi" href="https://travail-emploi.gouv.fr/qualiopi-marque-de-certification-qualite-des-prestataires-de-formation" target="_blank" rel="noopener" title="Organisme certifié Qualiopi">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRObiuRPHPYlaq1IgiUdpUR7ETxCvYdSa7r_DWy5rK8Hw&s=10" alt="Certifié Qualiopi">
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label for="type">Type de formation</label>
+      <select id="type">
+        <option value="init">Initiation Archicad</option>
+        <option value="perf">Perfectionnement Archicad</option>
+        <option value="both">Initiation et perfectionnement Archicad</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="nbPart">Nombre de participants (1 à 8)</label>
+      <input type="number" id="nbPart" min="1" max="8" value="1">
+    </div>
+
+    <div class="field">
+      <label for="duree">Durée de la formation (jours)</label>
+      <select id="duree"></select>
+    </div>
+
+    <div class="field">
+      <span class="label">Lieu de la formation</span>
+      <div class="radios">
+        <label class="radio"><input type="radio" name="lieu" value="client" checked> Dans vos locaux</label>
+        <label class="radio"><input type="radio" name="lieu" value="visio"> Par visioconférence</label>
+        <label class="radio"><input type="radio" name="lieu" value="formateur"> Dans les locaux du formateur</label>
+      </div>
+    </div>
+
+    <div class="field" id="blocLocalisation">
+      <span class="label">Localisation de la formation</span>
+      <div class="row">
+        <div class="rel">
+          <input type="text" id="cp" inputmode="numeric" maxlength="5" placeholder="Code postal" autocomplete="off">
+          <div class="sugg hidden" id="suggCp"></div>
+        </div>
+        <div class="rel">
+          <input type="text" id="ville" placeholder="Commune" autocomplete="off">
+          <div class="sugg hidden" id="suggVille"></div>
+        </div>
+      </div>
+      <div class="hint" id="locHint"></div>
+    </div>
+
+    <div class="field">
+      <span class="label">Statut des participants</span>
+      <div class="financeurs">
+        <div class="mini">
+          <label for="nbSal">Salariés (OPCO)</label>
+          <input type="number" id="nbSal" min="0" max="8" value="1">
+        </div>
+        <div class="mini">
+          <label for="nbNonSal">Non salariés (FIF PL)</label>
+          <input type="number" id="nbNonSal" min="0" max="8" value="0">
+        </div>
+      </div>
+      <div class="hint" id="statutHint"></div>
+    </div>
+  </div>
+
+  <div class="card results">
+    <div class="res-row"><span>Coût total de la formation (HT)</span><strong id="resA">–</strong></div>
+    <div class="res-row deduct">
+      <span>Prise en charge supposée OPCO / FIF PL (HT)</span>
+      <strong><span id="resPEC">–</span><small id="resPct"></small></strong>
+    </div>
+    <div class="res-row main tone" id="rowF"><span>Reste à charge – formation (HT)</span><strong id="resF">–</strong></div>
+    <div class="res-row main tone" id="rowFp"><span>Reste à charge – par participant (HT)</span><strong id="resFp">–</strong></div>
+    <div class="disclaimer">⚠ Simulation indicative, non contractuelle. Le montant définitif dépend de l'acceptation des dossiers de prise en charge par les organismes financeurs.</div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const eur = n => n.toLocaleString("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+const API = "https://geo.api.gouv.fr/communes";
+
+/* Ajuste la taille du titre pour qu'il ait exactement la largeur du texte situé dessous */
+function ajusteTitre(){
+  const h1=$("titreH1"), sub=$("titreSub");
+  if(window.innerWidth<=520){ h1.style.fontSize=""; return; }
+  h1.style.fontSize="20px";
+  const wH=h1.getBoundingClientRect().width;
+  const wS=sub.scrollWidth;
+  if(wH>0) h1.style.fontSize=(20*wS/wH)+"px";
+}
+window.addEventListener("resize",ajusteTitre);
+window.addEventListener("load",ajusteTitre);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(ajusteTitre);
+
+/* Point de départ : Bouguenais */
+const BASE = {lat:47.1797, lon:-1.6200};
+
+/* Communes de Nantes Métropole (codes INSEE) */
+const NANTES_METRO = new Set([
+  "44109","44009","44018","44020","44026","44035","44047","44050","44062","44071","44074",
+  "44094","44114","44120","44143","44150","44162","44166","44172","44190","44194","44198",
+  "44201","44204","44215"
+]);
+const isParis = c => c.code==="75056" || /^751\d\d$/.test(c.code);
+
+function haversine(a,b){
+  const R=6371, rad=x=>x*Math.PI/180;
+  const dLat=rad(b.lat-a.lat), dLon=rad(b.lon-a.lon);
+  const h=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+function minutesTrajet(c){
+  return (haversine(BASE,{lat:c.lat,lon:c.lon})*1.3/75)*60;
+}
+function zoneDe(c){
+  if(NANTES_METRO.has(c.code)) return {key:"nantes", tarif:20};
+  if(isParis(c))               return {key:"paris",  tarif:250};
+  const m=minutesTrajet(c);
+  if(m<=30)  return {key:"t30",  tarif:70};
+  if(m<=60)  return {key:"t60",  tarif:140};
+  if(m<=120) return {key:"t120", tarif:180};
+  return           {key:"t120p",tarif:220};
+}
+
+let commune=null, zone=null;
+
+async function fetchJSON(url){
+  const r=await fetch(url); if(!r.ok) throw new Error("API");
+  return r.json();
+}
+const FIELDS="fields=nom,code,codesPostaux,centre&format=json&geometry=centre";
+
+function normalise(c, cpPrefere){
+  return {
+    nom:c.nom, code:c.code,
+    cp: cpPrefere || (c.codesPostaux&&c.codesPostaux[0]) || "",
+    lat:c.centre?c.centre.coordinates[1]:null,
+    lon:c.centre?c.centre.coordinates[0]:null
+  };
+}
+function choisir(c){
+  commune=c; zone=zoneDe(c);
+  $("cp").value=c.cp; $("ville").value=c.nom;
+  closeSugg();
+  $("locHint").textContent=""; $("locHint").className="hint";
+  majDuree(); calcul();
+}
+function invalide(msg){
+  commune=null; zone=null;
+  const h=$("locHint"); h.textContent=msg||""; h.className="hint warn";
+  majDuree(); calcul();
+}
+function closeSugg(){
+  $("suggCp").classList.add("hidden"); $("suggVille").classList.add("hidden");
+}
+function showSugg(el, items, onPick){
+  el.innerHTML="";
+  items.forEach(it=>{
+    const d=document.createElement("div");
+    d.textContent=it.label;
+    d.addEventListener("mousedown",e=>{e.preventDefault(); onPick(it.value);});
+    el.appendChild(d);
+  });
+  el.classList.toggle("hidden", !items.length);
+}
+
+/* Saisie code postal */
+let tCp;
+$("cp").addEventListener("input",()=>{
+  const v=$("cp").value.replace(/\D/g,"").slice(0,5);
+  $("cp").value=v;
+  clearTimeout(tCp);
+  commune=null; zone=null;
+  if(v.length<5){ $("locHint").textContent=""; $("suggCp").classList.add("hidden"); majDuree(); calcul(); return; }
+  tCp=setTimeout(async()=>{
+    try{
+      const data=await fetchJSON(`${API}?codePostal=${v}&${FIELDS}`);
+      if(!data.length){ invalide("Code postal introuvable."); return; }
+      if(data.length===1){ choisir(normalise(data[0],v)); }
+      else{
+        showSugg($("suggCp"), data.map(c=>({label:`${c.nom} (${v})`, value:normalise(c,v)})), choisir);
+        $("locHint").textContent="Plusieurs communes correspondent : choisissez-en une.";
+        $("locHint").className="hint";
+        majDuree(); calcul();
+      }
+    }catch(e){ invalide("Service de localisation indisponible. Vérifiez votre connexion."); }
+  },250);
+});
+
+/* Saisie commune */
+let tVille;
+$("ville").addEventListener("input",()=>{
+  const v=$("ville").value.trim();
+  clearTimeout(tVille);
+  commune=null; zone=null; majDuree(); calcul();
+  if(v.length<2){ $("suggVille").classList.add("hidden"); $("locHint").textContent=""; return; }
+  tVille=setTimeout(async()=>{
+    try{
+      const data=await fetchJSON(`${API}?nom=${encodeURIComponent(v)}&boost=population&limit=8&${FIELDS}`);
+      const items=[];
+      data.forEach(c=>{
+        const cps=(c.codesPostaux&&c.codesPostaux.length)?c.codesPostaux:[""];
+        cps.slice(0,3).forEach(cp=>items.push({label:`${c.nom} (${cp})`, value:normalise(c,cp)}));
+      });
+      showSugg($("suggVille"), items.slice(0,10), choisir);
+    }catch(e){ invalide("Service de localisation indisponible. Vérifiez votre connexion."); }
+  },250);
+});
+document.addEventListener("click",e=>{ if(!e.target.closest(".rel")) closeSugg(); });
+
+/* Tarification */
+function tarifParticipant(n, lieu, zoneKey){
+  if(n===1) return (lieu==="visio" || zoneKey==="nantes") ? 740 : 840;
+  if(n===2) return 840;
+  if(n===3) return 940;
+  if(n<=5)  return 1040;
+  return 1140;
+}
+
+function majDuree(){
+  const lieu=document.querySelector('input[name=lieu]:checked').value;
+  const type=$("type").value;
+  const unJourOk = lieu==="visio" || (lieu==="client" && zone && zone.key==="nantes");
+  let min = unJourOk ? 1 : 2;
+  if(type==="both") min=Math.max(min,4);
+  const sel=$("duree"), cur=parseInt(sel.value)||3;
+  sel.innerHTML="";
+  for(let j=min; j<=8; j++){
+    const o=document.createElement("option");
+    o.value=j; o.textContent=j+(j>1?" jours":" jour");
+    sel.appendChild(o);
+  }
+  sel.value=Math.max(cur,min);
+}
+
+function calcul(){
+  const lieu=document.querySelector('input[name=lieu]:checked').value;
+  const n=Math.min(8,Math.max(1,parseInt($("nbPart").value)||1));
+  const duree=parseInt($("duree").value)||3;
+  const sal=Math.max(0,parseInt($("nbSal").value)||0);
+  const nonSal=Math.max(0,parseInt($("nbNonSal").value)||0);
+
+  const sh=$("statutHint");
+  if(sal+nonSal!==n){
+    sh.textContent=`Le total (${sal+nonSal}) doit être égal au nombre de participants (${n}).`;
+    sh.className="hint warn";
+  } else { sh.textContent=""; sh.className="hint"; }
+
+  $("blocLocalisation").classList.toggle("hidden", lieu==="visio");
+
+  let D=0;
+  if(lieu==="client"){
+    if(!zone){ affiche(null); return; }
+    D=zone.tarif;
+  }
+  const C = lieu==="formateur" ? 90 : 0;
+  const B = tarifParticipant(n, lieu, lieu==="client" && zone ? zone.key : null);
+
+  const A=(B+D+C)*duree;
+  const pec = sal*210*Math.min(duree,6) + nonSal*300*Math.min(duree,3);
+  const pecEff = Math.min(pec,A);
+  const F=Math.max(0, A-pec);
+  affiche({A, pec:pecEff, F, n});
+}
+
+function affiche(r){
+  const rows=[$("rowF"),$("rowFp")];
+  rows.forEach(x=>x.classList.remove("vert","orange","rouge"));
+  if(!r){
+    ["resA","resPEC","resF","resFp"].forEach(i=>$(i).textContent="–");
+    $("resPct").textContent="";
+    $("rowFp").classList.add("hidden");
+    return;
+  }
+  $("resA").textContent=eur(r.A);
+  $("resPEC").textContent="− "+eur(r.pec);
+  const pctPec = r.A>0 ? Math.round(r.pec/r.A*100) : 0;
+  $("resPct").textContent=`(${pctPec} %)`;
+  $("resF").textContent=eur(r.F);
+  $("resFp").textContent=eur(r.F/r.n);
+  $("rowFp").classList.toggle("hidden", r.n===1);
+
+  /* Couleur selon la part du reste à charge dans le prix de la formation :
+     faible = vert, intermédiaire = orange, élevé = rouge */
+  const ratio = r.A>0 ? r.F/r.A : 0;
+  const cls = ratio>0.5 ? "rouge" : (ratio>0.25 ? "orange" : "vert");
+  rows.forEach(x=>x.classList.add(cls));
+}
+
+/* Événements */
+document.querySelectorAll('input[name=lieu]').forEach(r=>r.addEventListener("change",()=>{majDuree();calcul();}));
+$("type").addEventListener("change",()=>{majDuree();calcul();});
+$("duree").addEventListener("change",calcul);
+$("nbPart").addEventListener("input",()=>{
+  const n=Math.min(8,Math.max(1,parseInt($("nbPart").value)||1));
+  $("nbPart").value=n; $("nbSal").value=n; $("nbNonSal").value=0; calcul();
+});
+$("nbSal").addEventListener("input",()=>{
+  const n=parseInt($("nbPart").value)||1;
+  $("nbNonSal").value=Math.max(0,n-(parseInt($("nbSal").value)||0)); calcul();
+});
+$("nbNonSal").addEventListener("input",()=>{
+  const n=parseInt($("nbPart").value)||1;
+  $("nbSal").value=Math.max(0,n-(parseInt($("nbNonSal").value)||0)); calcul();
+});
+
+majDuree(); $("duree").value=3; calcul();
+ajusteTitre();
+</script>
+</body>
+</html>
