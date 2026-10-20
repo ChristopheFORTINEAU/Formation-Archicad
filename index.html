@@ -678,5 +678,47 @@ majDuree(); $("sim-duree").value=3; calcul();
 </footer>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
+<!-- Style pour s'assurer que la sélection soit bien contrastée -->
+<style>
+  .compteur-secret {
+    color: #ffffff;             /* Texte blanc */
+    background-color: #ffffff;  /* Fond blanc */
+    user-select: text;          /* Autorise la sélection */
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    cursor: default;
+  }
+
+  /* Force un fond bleu et un texte blanc lors du surlignage */
+  .compteur-secret::selection {
+    background: #0078d4;
+    color: #ffffff;
+  }
+</style>
+
+<!-- Le texte invisible -->
+<div class="compteur-secret">
+  Visites : <span id="nb-visites">...</span>
+</div>
+
+<!-- Script pour récupérer et incrémenter le compteur -->
+<script>
+  (function() {
+    // ⚠️ Remplacez cet identifiant par un nom unique pour votre site (sans espaces)
+    const monIdentifiant = "mon-portfolio-github-2026";
+
+    // Appel à une API de comptage libre et sans inscription
+    fetch(`https://countapi.mileshilliard.com/api/v1/hit/${monIdentifiant}`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("nb-visites").textContent = data.value;
+      })
+      .catch(() => {
+        // En cas d'erreur ou de bloqueur de pub
+        document.getElementById("nb-visites").textContent = "1";
+      });
+  })();
+</script>
 </body>
 </html>
